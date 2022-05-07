@@ -1,0 +1,1 @@
+import "./signUpService.relations";
