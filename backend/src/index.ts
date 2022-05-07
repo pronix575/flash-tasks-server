@@ -2,6 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import swaggerUi  from "swagger-ui-express";
+import swaggerDocument from "./swagger.json";
 
 import { userRouter } from "./router/userRouter";
 
@@ -22,6 +24,11 @@ app.use(cookieParser());
 
 app.use("/api", userRouter);
 
+app.use(
+  '/api-docs',
+  swaggerUi.serve, 
+  swaggerUi.setup(swaggerDocument)
+);
 
 
 const start = async () => {
