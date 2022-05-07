@@ -15,20 +15,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const token_model_1 = __importDefault(require("../models/token-model"));
 class TokenService {
-    generateToken(payload) {
-        const accessToken = jsonwebtoken_1.default.sign(payload, "Secret", { expiresIn: "15m" });
-        const refreshToken = jsonwebtoken_1.default.sign(payload, "SecretRefresh", { expiresIn: "10d" });
+    generateToken(id) {
+        const accessToken = jsonwebtoken_1.default.sign(id, "9FmLYfj8NxHtjDLkLkMGFefj9U96zbRGPYza4vJVYwPBns5H9e", { expiresIn: "15m" });
+        const refreshToken = jsonwebtoken_1.default.sign(id, "JEw9cEyegWxNwPTQdhRmPVT2CB9hX7H3qMEJjx3b5YQKRheJCf", { expiresIn: "10d" });
         return {
             accessToken,
             refreshToken
         };
     }
     validateAccessToken(token) {
-        const userData = jsonwebtoken_1.default.verify(token, "Secret");
-        return userData;
+        const id = jsonwebtoken_1.default.verify(token, "9FmLYfj8NxHtjDLkLkMGFefj9U96zbRGPYza4vJVYwPBns5H9e");
+        return id;
     }
     validateRefreshToken(token) {
-        const userData = jsonwebtoken_1.default.verify(token, "SecretRefresh");
+        const userData = jsonwebtoken_1.default.verify(token, "JEw9cEyegWxNwPTQdhRmPVT2CB9hX7H3qMEJjx3b5YQKRheJCf");
         return userData;
     }
     saveToken(userId, refreshToken) {

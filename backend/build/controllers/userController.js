@@ -24,10 +24,13 @@ class UserController {
                 if (!errors.isEmpty()) {
                     return res.status(400).json({ message: "error" });
                 }
-                const { login, password } = req.body;
-                const userData = yield userService_1.userService.registration(login, password);
-                res.cookie('refreshToken', userData === null || userData === void 0 ? void 0 : userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
-                res.json(userData);
+                const { name, email, password, confirmationPassword } = req.body;
+                const tokens = yield userService_1.userService.registration(name, email, password, confirmationPassword);
+                res.cookie("refreshToken", tokens === null || tokens === void 0 ? void 0 : tokens.refreshToken, {
+                    maxAge: 30 * 24 * 60 * 60 * 1000,
+                    httpOnly: true,
+                });
+                res.json(tokens);
             }
             catch (e) {
                 res.status(401).json(e.message);
@@ -39,7 +42,10 @@ class UserController {
             try {
                 const { login, password } = req.body;
                 const userData = yield userService_1.userService.login(login, password);
-                res.cookie('refreshToken', userData === null || userData === void 0 ? void 0 : userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
+                res.cookie("refreshToken", userData === null || userData === void 0 ? void 0 : userData.refreshToken, {
+                    maxAge: 30 * 24 * 60 * 60 * 1000,
+                    httpOnly: true,
+                });
                 res.json(userData);
             }
             catch (e) {
@@ -52,7 +58,7 @@ class UserController {
             try {
                 const { refreshToken } = req.cookies;
                 const data = yield userService_1.userService.logout(refreshToken);
-                res.clearCookie('refreshToken');
+                res.clearCookie("refreshToken");
                 return res.status(200).send();
             }
             catch (e) { }
@@ -63,7 +69,10 @@ class UserController {
             try {
                 const { refreshToken } = req.cookies;
                 const userData = yield userService_1.userService.refresh(refreshToken);
-                res.cookie('refreshToken', userData === null || userData === void 0 ? void 0 : userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
+                res.cookie("refreshToken", userData === null || userData === void 0 ? void 0 : userData.refreshToken, {
+                    maxAge: 30 * 24 * 60 * 60 * 1000,
+                    httpOnly: true,
+                });
                 return res.json(userData);
             }
             catch (e) {
