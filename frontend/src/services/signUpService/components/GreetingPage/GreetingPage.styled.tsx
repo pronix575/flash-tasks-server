@@ -19,3 +19,9 @@ export const GradientTitle = styled.span`
   -webkit-text-fill-color: transparent;
   color: #0b2349;
 `;
+
+export const FormWrapper = styled.div`
+  @media (min-width:0) and (max-width: 900px) {
+    display: none;
+  }
+`
