@@ -17,6 +17,6 @@ async function bootstrap() {
 
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(9000);
+  await app.listen(9000, () => console.log(`server has been started`));
 }
 bootstrap();

@@ -7,9 +7,10 @@ import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017', {
-      dbName: 'todo-list',
-    }),
+    MongooseModule.forRoot(
+      'mongodb+srv://Rinasik:qwerty123@data.vd0po.mongodb.net/messengerData?retryWrites=true&w=majority',
+      { dbName: 'todo-list', retryDelay: 100 },
+    ),
     UsersModule,
     AuthModule,
   ],
