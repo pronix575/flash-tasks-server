@@ -1,5 +1,5 @@
 import { Layout } from "../../../../shared/components/Layout";
-import { SignUpForm } from "./components/SignUpForm";
+import { SignUpFormContainer } from "../../SignUpFormService/SignUpFormService.container";
 import { GradientTitle, Greeting, Wrap } from "./SignUpPage.styled";
 
 export const SignUpPage = () => {
@@ -12,7 +12,7 @@ export const SignUpPage = () => {
             powerful TodoList
           </GradientTitle>
         </Greeting>
-        <SignUpForm />
+        <SignUpFormContainer />
       </Wrap>
     </Layout>
   );
