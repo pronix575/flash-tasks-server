@@ -2,7 +2,12 @@ import { Link } from "react-router-dom";
 import { Button } from "../../../../shared/components/Button";
 import { Layout } from "../../../../shared/components/Layout";
 import { SignUpFormContainer } from "../../SignUpFormService/SignUpFormService.container";
-import { GradientTitle, Greeting, Wrap } from "./GreetingPage.styled";
+import {
+  FormWrapper,
+  GradientTitle,
+  Greeting,
+  Wrap,
+} from "./GreetingPage.styled";
 
 export const GreetingPage = () => {
   return (
@@ -21,7 +26,9 @@ export const GreetingPage = () => {
             <Button style={{ marginTop: 15 }}>Sign in</Button>
           </Link>
         </Greeting>
-        <SignUpFormContainer />
+        <FormWrapper>
+          <SignUpFormContainer />
+        </FormWrapper>
       </Wrap>
     </Layout>
   );
