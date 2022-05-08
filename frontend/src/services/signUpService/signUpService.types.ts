@@ -1,6 +1,4 @@
-export interface SignUpRequestPayload {
-  name: string;
-  email: string;
-  password: string;
-  passwordConfirmation: string;
+import { CreateUserDto } from "../../api/types";
+
+export interface SignUpRequestPayload extends CreateUserDto {
 }

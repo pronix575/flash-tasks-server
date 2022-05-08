@@ -4,10 +4,8 @@ import { Wrap } from "./SignInPage.styled";
 
 export const SignInPage = () => {
   return (
-    <Layout>
       <Wrap>
         <SignInFormContainer />
       </Wrap>
-    </Layout>
   );
 };
