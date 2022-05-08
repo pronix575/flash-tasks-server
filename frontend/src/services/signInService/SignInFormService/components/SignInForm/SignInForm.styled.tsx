@@ -8,11 +8,6 @@ export const Wrapper = styled.div`
   border-radius: 15px;
 `;
 
-export const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
 export const LinkText = styled.div`
   margin-top: 10px;
   text-align: center;

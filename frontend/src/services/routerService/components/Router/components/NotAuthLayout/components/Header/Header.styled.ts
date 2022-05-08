@@ -17,7 +17,10 @@ export const StyledHeader = styled.div`
 export const HeaderContent = styled.div``;
 
 export const Logo = styled.div`
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-`
+  cursor: pointer;
+
+  user-select: none;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+`;
