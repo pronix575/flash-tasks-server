@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { SignUpPageContainer } from "../../../signUpService/signUpService.container";
+import { GreetingPageContainer, SignUpPageContainer } from "../../../signUpService/signUpService.container";
+import { SignInPageContainer } from "../../../signInService/signInService.container";
 import { NotAuthLayout } from "./components/NotAuthLayout";
 
 export const Router = () => {
@@ -7,7 +8,9 @@ export const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<NotAuthLayout />}>
-          <Route index element={<SignUpPageContainer />} />
+          <Route path="/SignUp" element={<SignUpPageContainer />} />
+          <Route path="/SignIn" element={<SignInPageContainer/>} />
+          <Route path="/" element={<GreetingPageContainer/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

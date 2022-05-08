@@ -7,9 +7,10 @@ export const Button: FC<ButtonProps> = ({
   style,
   size = "lg",
   block = false,
+  onClick,
 }) => {
   return (
-    <Wrapper style={style} size={size} block={block}>
+    <Wrapper style={style} size={size} block={block} onClick={onClick}>
       {children}
     </Wrapper>
   );

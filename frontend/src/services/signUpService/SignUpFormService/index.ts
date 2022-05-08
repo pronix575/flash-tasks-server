@@ -1,1 +1,1 @@
-export { signUpService } from "../signUpService.models";
+export { SignUpFormService } from "./SignUpFormService.models";

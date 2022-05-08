@@ -1,7 +1,8 @@
 import { Form, Input } from "antd";
 import { FC } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "../../../../../shared/components/Button";
-import { ButtonWrapper, Wrapper } from "./SignUpForm.styled";
+import { ButtonWrapper, LinkText, Wrapper } from "./SignUpForm.styled";
 import { SignUpFormProps } from "./SignUpForm.types";
 
 export const SignUpForm: FC<SignUpFormProps> = () => {
@@ -20,8 +21,13 @@ export const SignUpForm: FC<SignUpFormProps> = () => {
         <Input placeholder="confirm password" type="password" />
       </Form.Item>
       <ButtonWrapper>
-        <Button block={true} size={'sm'}>Sign up</Button>
+        <Button block={true} size={"sm"}>
+          Sign up
+        </Button>
       </ButtonWrapper>
+      <Link to="/SignIn">
+        <LinkText>Already have an account?</LinkText>
+      </Link>
     </Wrapper>
   );
 };
