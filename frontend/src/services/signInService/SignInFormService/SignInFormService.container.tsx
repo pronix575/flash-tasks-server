@@ -19,7 +19,7 @@ export const SignInFormContainer = () => {
   useEffect(
     () =>
       signInSuccess.watch(() => {
-        navigate("/");
+        navigate("/Dashboard");
       }),
     []
   );

@@ -57,6 +57,7 @@ export const StyledModal = styled.div<{ pending?: boolean }>`
 export const Title = styled.div`
   font-weight: 600;
   font-size: 20px;
+  user-select: none;
 `;
 
 export const Close = styled.div`

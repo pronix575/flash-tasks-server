@@ -6,4 +6,6 @@ export const TitleWrapper = styled.div`
   color: #ffffff94;
   font-weight: 700;
   font-size: 40px;
+  user-select: none;
+
 `;
