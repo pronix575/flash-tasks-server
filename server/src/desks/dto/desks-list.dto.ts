@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Id, List } from 'src/types';
 
-export class CloumnResponseDto extends Id {
+export class ColumnResponseDto extends Id {
   @ApiProperty()
   name: string;
 
@@ -13,8 +13,8 @@ export class DeskResponseDto extends Id {
   @ApiProperty({ required: true })
   name: string;
 
-  @ApiProperty({ type: [CloumnResponseDto] })
-  columns: CloumnResponseDto[];
+  @ApiProperty({ type: [ColumnResponseDto] })
+  columns: ColumnResponseDto[];
 }
 
 export class DesksListResponseDto implements List<DeskResponseDto> {

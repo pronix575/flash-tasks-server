@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { ArrayMaxSize, IsArray, IsString, Length } from 'class-validator';
 
-export class CloumnCreateDto {
+export class ColumnCreateDto {
   @ApiProperty()
   @IsString()
   @Length(3, 30)
@@ -18,9 +18,9 @@ export class CreateDeskDto {
   @ApiProperty({ required: true })
   name: string;
 
-  @ApiProperty({ type: [CloumnCreateDto] })
+  @ApiProperty({ type: [ColumnCreateDto] })
   @IsArray()
   @ArrayMaxSize(6)
-  @Type(() => CloumnCreateDto)
-  columns: CloumnCreateDto[];
+  @Type(() => ColumnCreateDto)
+  columns: ColumnCreateDto[];
 }
