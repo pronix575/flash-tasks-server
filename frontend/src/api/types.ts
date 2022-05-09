@@ -16,6 +16,16 @@ export interface CreateUserDto {
   passwordConfirmation: string;
 }
 
+export interface SignInDto {
+  email: string;
+  password: string;
+}
+
+export interface SignInResponseDto {
+  access: string;
+  refresh: string;
+}
+
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
 
@@ -232,16 +242,17 @@ export class HttpClient<SecurityDataType = unknown> {
  * The TodoList API description
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
-  users = {
+  api = {
     /**
      * No description
      *
+     * @tags users
      * @name UsersControllerGetAll
-     * @request GET:/users
+     * @request GET:/api/users
      */
     usersControllerGetAll: (params: RequestParams = {}) =>
       this.request<void, any>({
-        path: `/users`,
+        path: `/api/users`,
         method: "GET",
         ...params,
       }),
@@ -249,12 +260,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags users
      * @name UsersControllerCreateUser
-     * @request POST:/users
+     * @request POST:/api/users
      */
     usersControllerCreateUser: (data: CreateUserDto, params: RequestParams = {}) =>
       this.request<void, any>({
-        path: `/users`,
+        path: `/api/users`,
         method: "POST",
         body: data,
         type: ContentType.Json,
@@ -264,13 +276,30 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags users
      * @name UsersControllerGetOne
-     * @request GET:/users/{id}
+     * @request GET:/api/users/{id}
      */
-    usersControllerGetOne: (id: number, params: RequestParams = {}) =>
+    usersControllerGetOne: (id: string, params: RequestParams = {}) =>
       this.request<void, any>({
-        path: `/users/${id}`,
+        path: `/api/users/${id}`,
         method: "GET",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags auth
+     * @name AuthControllerLogin
+     * @request POST:/api/auth/login
+     */
+    authControllerLogin: (data: SignInDto, params: RequestParams = {}) =>
+      this.request<any, SignInResponseDto>({
+        path: `/api/auth/login`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
         ...params,
       }),
   };

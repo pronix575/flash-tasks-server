@@ -1,10 +1,10 @@
 import { createDomain } from "effector";
-import { SignInRequestPayload } from "./signInService.types";
+import { SignInRequestPayload, Tokens } from "./signInService.types";
 
 const signInServiceDomain = createDomain("signInservice");
 
 const signIn = signInServiceDomain.createEvent<SignInRequestPayload>();
-const signInFx = signInServiceDomain.createEffect<SignInRequestPayload, void>();
+const signInFx = signInServiceDomain.createEffect<SignInRequestPayload, Tokens>();
 
 const signInSuccess = signInFx.doneData;
 const signInFailed = signInFx.failData;

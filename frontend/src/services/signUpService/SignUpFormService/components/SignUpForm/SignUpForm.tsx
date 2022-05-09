@@ -25,11 +25,11 @@ const SignUpSchema = Yup.object().shape({
     .min(8, "Password must be at least 8 characters")
     .max(30),
   passwordConfirmation: Yup.string()
-    .required("You must confirm your password")
+    .required("You must confirm password")
     .oneOf([Yup.ref("password"), null], "Passwords must match"),
 });
 
-export const SignUpForm: FC<SignUpFormProps> = () => {
+export const SignUpForm: FC<SignUpFormProps> = ({handleSubmit, loading}) => {
   const { values, handleChange, errors, submitForm } = useFormik<SignUpRequestPayload>(
     {
       initialValues: {
@@ -41,7 +41,7 @@ export const SignUpForm: FC<SignUpFormProps> = () => {
       validateOnBlur: false,
       validateOnChange: false,
       validationSchema: SignUpSchema,
-      onSubmit: () => void 0,
+      onSubmit: handleSubmit,
     }
   );
 
@@ -89,7 +89,7 @@ export const SignUpForm: FC<SignUpFormProps> = () => {
         <ErrorText>{errors.passwordConfirmation}</ErrorText>
       </Form.Item>
       <ButtonWrapper>
-        <Button block={true} size={"sm"} onClick={submitForm}>
+        <Button block size="sm" onClick={submitForm} loading={loading}>
           Sign up
         </Button>
       </ButtonWrapper>

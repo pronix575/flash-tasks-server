@@ -1,10 +1,26 @@
-import { useEvent } from "effector-react";
+import { message } from "antd";
+import { useEvent, useStore } from "effector-react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { signUpService } from "../signUpService.models";
 import { SignUpForm } from "./components/SignUpForm";
 import { SignUpFormService } from "./SignUpFormService.models";
 
 export const SignUpFormContainer = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = useEvent(SignUpFormService.inputs.signUp);
+  const loading = useStore(signUpService.outputs.$loading);
+  const signUpSuccess = signUpService.outputs.signUpSuccess;
 
-  return <SignUpForm handleSubmit={handleSubmit} />;
+  useEffect(
+    () =>
+      signUpSuccess.watch(() => {
+        message.success("Account has been created");
+        navigate("/SignIn");
+      }).unsubscribe(),
+    []
+  );
+
+  return <SignUpForm handleSubmit={handleSubmit} loading={loading} />;
 };
-

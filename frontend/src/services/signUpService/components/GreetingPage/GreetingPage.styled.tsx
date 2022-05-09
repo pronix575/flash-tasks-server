@@ -8,6 +8,7 @@ export const Wrap = styled.div`
 `;
 
 export const Greeting = styled.div`
+  user-select: none; 
   font-size: 40px;
   font-weight: 900;
   color: white;

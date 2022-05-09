@@ -1,4 +1,6 @@
-export interface SignInRequestPayload {
-    email: string,
-    password: string,
+import { SignInDto, SignInResponseDto } from "../../api/types";
+
+export interface SignInRequestPayload extends SignInDto {
 }
+
+export interface Tokens extends SignInResponseDto {}
