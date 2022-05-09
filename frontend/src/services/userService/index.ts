@@ -1,1 +1,1 @@
-export {userService} from "./userService.models"
+export { userService } from "./userService.models";

@@ -8,7 +8,7 @@ import { NotAuthLayout } from "./components/NotAuthLayout";
 import { AuthLayout } from "./components/AuthLayout";
 import { authService } from "../../../authService";
 import { useStore } from "effector-react";
-import { DashboardContainer } from "../../../todoService/todoService.container";
+import { DashboardContainer } from "../../../dashboardService/dashboardService.container";
 
 export const Router = () => {
   const isAuth = useStore(authService.outputs.$isAuth);

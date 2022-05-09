@@ -5,7 +5,7 @@ import { Title } from "../../../../shared/components/Title";
 import { AddDeskWrapper, PlusWrapper, Wrap } from "./Dashboard.styled";
 
 export const Dashboard: FC = () => {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
 
   return (
     <>
