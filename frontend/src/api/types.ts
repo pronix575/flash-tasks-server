@@ -9,6 +9,11 @@
  * ---------------------------------------------------------------
  */
 
+export interface UserResponseDto {
+  name: string;
+  email: string;
+}
+
 export interface CreateUserDto {
   name: string;
   email: string;
@@ -23,6 +28,10 @@ export interface SignInDto {
 
 export interface SignInResponseDto {
   access: string;
+  refresh: string;
+}
+
+export interface RefreshRequestDto {
   refresh: string;
 }
 
@@ -251,7 +260,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/api/users
      */
     usersControllerGetAll: (params: RequestParams = {}) =>
-      this.request<void, any>({
+      this.request<any, UserResponseDto[]>({
         path: `/api/users`,
         method: "GET",
         ...params,
@@ -281,8 +290,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/api/users/{id}
      */
     usersControllerGetOne: (id: string, params: RequestParams = {}) =>
-      this.request<void, any>({
+      this.request<any, UserResponseDto>({
         path: `/api/users/${id}`,
+        method: "GET",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags users
+     * @name UsersControllerGetMe
+     * @request GET:/api/users/me
+     */
+    usersControllerGetMe: (params: RequestParams = {}) =>
+      this.request<any, UserResponseDto>({
+        path: `/api/users/me`,
         method: "GET",
         ...params,
       }),
@@ -297,6 +320,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     authControllerLogin: (data: SignInDto, params: RequestParams = {}) =>
       this.request<any, SignInResponseDto>({
         path: `/api/auth/login`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags auth
+     * @name AuthControllerRefresh
+     * @request POST:/api/auth/refresh
+     */
+    authControllerRefresh: (data: RefreshRequestDto, params: RequestParams = {}) =>
+      this.request<any, SignInResponseDto>({
+        path: `/api/auth/refresh`,
         method: "POST",
         body: data,
         type: ContentType.Json,

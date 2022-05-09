@@ -13,7 +13,7 @@ const SignInSchema = Yup.object().shape({
   password: Yup.string().required("Password is required"),
 });
 
-export const SignInForm: FC<SignInFormProps> = () => {
+export const SignInForm: FC<SignInFormProps> = ({handleSubmit, loading}) => {
   const { values, handleChange, errors, submitForm } = useFormik<SignInRequestPayload>({
     initialValues: {
       email: "",
@@ -22,7 +22,7 @@ export const SignInForm: FC<SignInFormProps> = () => {
     validateOnBlur: false,
     validateOnChange: false,
     validationSchema: SignInSchema,
-    onSubmit: () => void 0,
+    onSubmit: handleSubmit,
   });
 
   return (
@@ -47,7 +47,7 @@ export const SignInForm: FC<SignInFormProps> = () => {
         />
         <ErrorText>{errors.password}</ErrorText>
       </Form.Item>
-      <Button block={true} size={"sm"} onClick={submitForm}>
+      <Button block size={"sm"} onClick={submitForm} loading={loading}>
         Sign in
       </Button>
       <Link to="/SignUp">
