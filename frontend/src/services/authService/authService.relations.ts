@@ -22,8 +22,6 @@ sample({
     const access = localStorage.getItem("AccessToken");
     const refresh = localStorage.getItem("RefreshToken");
 
-    console.log(access, refresh);
-
     return Boolean(access && refresh);
   },
   target: authService.inputs.signInUser,

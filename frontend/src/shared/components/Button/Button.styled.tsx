@@ -13,7 +13,7 @@ export const Wrapper = styled.div<{
   user-select: none;
   cursor: pointer; 
 
-  padding: ${({ size }) => (size === "lg" ? "15px 35px" : "7px 25px")};
+  padding: ${({ size }) => (size === "lg" ? "15px 35px" : "5px 25px")};
   font-size: ${({ size }) => (size === "lg" ? "18px" : "16px")};
   border-radius: ${({ size }) => (size === "lg" ? "15px" : "8px")};
   width: ${({ block }) => (block ? "100%" : "none")};
