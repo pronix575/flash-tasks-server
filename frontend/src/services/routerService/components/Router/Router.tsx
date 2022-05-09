@@ -8,7 +8,7 @@ import { NotAuthLayout } from "./components/NotAuthLayout";
 import { AuthLayout } from "./components/AuthLayout";
 import { authService } from "../../../authService";
 import { useStore } from "effector-react";
-import { DashboardContainer } from "../../../dashboardService/dashboardService.container";
+import {  DashboardPageContainer } from "../../../dashboardService/dashboardService.container";
 
 export const Router = () => {
   const isAuth = useStore(authService.outputs.$isAuth);
@@ -30,7 +30,7 @@ export const Router = () => {
         {isAuth && (
           <Route path="/" element={<AuthLayout />}>
             
-            <Route path="/Dashboard" element={<DashboardContainer />} />
+            <Route path="/Dashboard" element={<DashboardPageContainer />} />
             <Route path="*"  element={<Navigate to="/Dashboard" />} />
           </Route>
         )}
