@@ -9,7 +9,7 @@ export class CloumnDto extends Id {
   color?: string;
 }
 
-export class DeskDto extends Id {
+export class DeskResponseDto extends Id {
   @ApiProperty({ required: true })
   name: string;
 
@@ -17,7 +17,7 @@ export class DeskDto extends Id {
   columns: CloumnDto[];
 }
 
-export class DesksListResponseDto implements List<DeskDto> {
-  @ApiProperty({ type: [DeskDto] })
-  items: DeskDto[];
+export class DesksListResponseDto implements List<DeskResponseDto> {
+  @ApiProperty({ type: [DeskResponseDto] })
+  items: DeskResponseDto[];
 }

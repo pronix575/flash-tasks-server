@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDocument } from 'src/users/schemas/user.schema';
 import { UsersService } from 'src/users/users.service';
-import { DesksListResponseDto } from './dto/desks-list.dto';
+import { DeskResponseDto, DesksListResponseDto } from './dto/desks-list.dto';
 import { CreateDeskDto } from './dto/create-desk-dto';
 import { Desk, DeskDocument } from './schemas/desk.schema';
 
@@ -36,5 +36,15 @@ export class DesksService {
     return {
       items: desks,
     };
+  }
+
+  async getById(id: string, userId: string): Promise<DeskResponseDto> {
+    const desk = await this.deskModel.findById(id);
+
+    if (desk.creator._id === userId) {
+      return desk;
+    } else {
+      throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+    }
   }
 }
