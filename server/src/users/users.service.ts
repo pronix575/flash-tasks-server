@@ -30,6 +30,8 @@ export class UsersService {
       password: hashedPassword,
     });
 
-    return newUser.save();
+    await newUser.save();
+
+    return 'success created';
   }
 }
