@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { ApiTags } from '@nestjs/swagger';
 import { Model } from 'mongoose';
+import { hashPassword } from 'src/utils/hashPassword';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User, UserDocument } from './schemas/user.schema';
 
@@ -18,11 +18,14 @@ export class UsersService {
   }
 
   async createUser(userDto: CreateUserDto) {
+    const hashedPassword = await hashPassword(userDto.password);
+
     const newUser = new this.userModel({
       name: userDto.name,
       email: userDto.email,
+      password: hashedPassword,
     });
 
-    return newUser;
+    return newUser.save();
   }
 }

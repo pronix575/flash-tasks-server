@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsNotEmpty, Length } from 'class-validator';
+import { Match } from './match.decorator';
 
 export class CreateUserDto {
   @ApiProperty({ required: true })
@@ -18,5 +19,6 @@ export class CreateUserDto {
 
   @ApiProperty({ required: true })
   @Length(8, 30)
+  @Match('password', { message: 'Passwords must match' })
   readonly passwordConfirmation: string;
 }
