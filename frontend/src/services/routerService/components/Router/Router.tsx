@@ -10,7 +10,7 @@ export const Router = () => {
         <Route path="/" element={<NotAuthLayout />}>
           <Route path="/SignUp" element={<SignUpPageContainer />} />
           <Route path="/SignIn" element={<SignInPageContainer/>} />
-          <Route path="/" element={<GreetingPageContainer/>}/>
+          <Route index element={<GreetingPageContainer/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

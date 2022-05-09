@@ -1,5 +1,5 @@
 
-import { GreetingPage } from "./components/GreetingPage/GreetingPage";
+import { GreetingPage } from "./components/GreetingPage";
 import { SignUpPage } from "./components/SignUpPage";
 
 export const GreetingPageContainer = () => {

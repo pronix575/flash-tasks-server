@@ -13,3 +13,7 @@ export const LinkText = styled.div`
   text-align: center;
   text-decoration: underline;
 `;
+
+export const ErrorText = styled.div`
+  color:red;
+`

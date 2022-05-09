@@ -4,10 +4,8 @@ import { Wrap } from "./SignUpPage.styled";
 
 export const SignUpPage = () => {
   return (
-    <Layout>
-      <Wrap>
-        <SignUpFormContainer />
-      </Wrap>
-    </Layout>
+    <Wrap>
+      <SignUpFormContainer />
+    </Wrap>
   );
 };
