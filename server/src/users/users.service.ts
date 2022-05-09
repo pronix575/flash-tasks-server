@@ -17,6 +17,10 @@ export class UsersService {
     return this.userModel.findById(id);
   }
 
+  async getByEmail(email: string): Promise<User> {
+    return this.userModel.findOne({ email }).exec();
+  }
+
   async createUser(userDto: CreateUserDto) {
     const hashedPassword = await hashPassword(userDto.password);
 
