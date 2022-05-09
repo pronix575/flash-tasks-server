@@ -1,5 +1,5 @@
-import { TodoElement } from "./components/todoElement"
+import { TodoPage } from "./components/TodoPage"
 
 export const TodoContainer = () => {
-    return <TodoElement/> 
+    return <TodoPage/> 
 }
