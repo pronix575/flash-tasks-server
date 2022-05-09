@@ -12,8 +12,11 @@ import { useStore } from "effector-react";
 export const Router = () => {
   const isAuth = useStore(authService.outputs.$isAuth);
 
+  const { AuthGate } = authService.inputs;
+
   return (
     <BrowserRouter>
+      <AuthGate />
       <Routes>
         {!isAuth && (
           <Route path="/" element={<NotAuthLayout />}>

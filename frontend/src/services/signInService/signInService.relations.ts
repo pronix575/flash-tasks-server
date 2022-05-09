@@ -6,8 +6,3 @@ forward({
   from: signInService.inputs.signIn,
   to: signInService.inputs.signInFx,
 });
-
-signInService.inputs.signInFx.doneData.watch((tokens: Tokens) => {
-  localStorage.setItem("AccessToken", tokens.access);
-  localStorage.setItem("RefreshToken", tokens.refresh);
-});
