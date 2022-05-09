@@ -1,7 +1,8 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Auth, UserId } from 'src/auth/auth.decorator';
 import { DesksService } from './desks.service';
+import { DesksListResponseDto } from './dto/desks-list.dto';
 import { CreateDeskDto } from './dto/create-desk-dto';
 
 @Controller('desks')
@@ -11,8 +12,9 @@ export class DesksController {
 
   @Get()
   @Auth()
-  getAll() {
-    return '';
+  @ApiResponse({ type: DesksListResponseDto })
+  getAll(@UserId() userId: string): Promise<DesksListResponseDto> {
+    return this.desksService.getAll(userId);
   }
 
   @Post()

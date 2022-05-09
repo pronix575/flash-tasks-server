@@ -8,7 +8,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 
-class CloumnDto {
+export class CloumnDto {
   @ApiProperty()
   @IsString()
   @Length(3, 30)
