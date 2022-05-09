@@ -1,10 +1,15 @@
 import { FC } from "react";
 import { Outlet } from "react-router-dom";
-import { Header } from "./components/Header";
+import { userService } from "../../../../../userService";
+import { HeaderContainer } from "./components/Header/Header.container";
 
 export const AuthLayout: FC = () => {
-  return <>
-    <Header/>
-    <Outlet/>
-  </>;
+  const { GetUserGate } = userService.inputs;
+  return (
+    <>
+      <GetUserGate />
+      <HeaderContainer />
+      <Outlet />
+    </>
+  );
 };

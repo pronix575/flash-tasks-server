@@ -14,7 +14,6 @@ export const Router = () => {
 
   const { AuthGate } = authService.inputs;
 
-
   return (
     <BrowserRouter>
       <AuthGate />
@@ -25,14 +24,11 @@ export const Router = () => {
             <Route path="/SignIn" element={<SignInPageContainer />} />
             <Route index element={<GreetingPageContainer />} />
             <Route path="*" element={<Navigate to="/" />} />
-
           </Route>
         )}
-
         {isAuth && (
-          
           <Route path="/" element={<AuthLayout />}>
-            <Route path="/Dashboard"/>
+            <Route path="/Dashboard" />
             <Route path="*" element={<Navigate to="/Dashboard" />} />
           </Route>
         )}

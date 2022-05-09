@@ -1,4 +1,3 @@
-import { message } from "antd";
 import { createDomain } from "effector";
 import { createUser } from "./signUpService.api";
 import { SignUpRequestPayload } from "./signUpService.types";
