@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { DesksModule } from './desks/desks.module';
+import { TasksModule } from './tasks/tasks.module';
 
 @Module({
   imports: [
@@ -12,9 +13,10 @@ import { DesksModule } from './desks/desks.module';
       'mongodb+srv://Rinasik:qwerty123@data.vd0po.mongodb.net/messengerData?retryWrites=true&w=majority',
       { dbName: 'todo-list', retryDelay: 100 },
     ),
-    UsersModule,
     AuthModule,
+    UsersModule,
     DesksModule,
+    TasksModule,
   ],
   controllers: [AppController],
   providers: [AppService],

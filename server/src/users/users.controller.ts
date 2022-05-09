@@ -21,12 +21,6 @@ import { getUserDto } from './utils';
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
-  @Get()
-  @ApiResponse({ type: [UserResponseDto] })
-  getAll() {
-    return this.userService.getAll();
-  }
-
   @Get('me')
   @ApiResponse({ type: UserResponseDto })
   @Auth()
@@ -39,6 +33,7 @@ export class UsersController {
   @Get(':id')
   @HttpCode(HttpStatus.CREATED)
   @ApiResponse({ type: UserResponseDto })
+  @Auth()
   getOne(@Param('id') id: string) {
     return this.userService.getById(id);
   }

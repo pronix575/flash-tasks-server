@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { Desk } from 'src/desks/schemas/desk.schema';
+import { Model, SchemaTypes } from 'mongoose';
+import { Desk, DeskDocument } from 'src/desks/schemas/desk.schema';
 import { hashPassword } from 'src/utils/hashPassword';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserResponseDto } from './dto/user-response.dto';
@@ -40,10 +40,10 @@ export class UsersService {
     return 'success created';
   }
 
-  async addDesk(desk: Desk, userId: string) {
+  async addDesk(desk: DeskDocument, userId: string) {
     const user = await this.userModel.findById(userId);
 
-    user.desks.push(desk);
+    user.desks.push(desk._id);
 
     return await user.save();
   }

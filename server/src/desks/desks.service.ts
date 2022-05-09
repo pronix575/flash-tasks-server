@@ -51,4 +51,18 @@ export class DesksService {
       throw new HttpException('Not found', HttpStatus.NOT_FOUND);
     }
   }
+
+  async deleteById(id: string, userId: string) {
+    try {
+      const desk = await this.deskModel.findById(id);
+
+      if (!desk || desk.creator.toString() !== userId) {
+        throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+      }
+
+      return await desk.delete();
+    } catch (error) {
+      throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+    }
+  }
 }

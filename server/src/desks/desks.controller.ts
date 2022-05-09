@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Auth, UserId } from 'src/auth/auth.decorator';
 import { DesksService } from './desks.service';
@@ -31,5 +31,11 @@ export class DesksController {
       ...createDeskDto,
       userId,
     });
+  }
+
+  @Delete(':id')
+  @Auth()
+  deleteDesk(@Param('id') id: string, @UserId() userId: string) {
+    return this.desksService.deleteById(id, userId);
   }
 }
