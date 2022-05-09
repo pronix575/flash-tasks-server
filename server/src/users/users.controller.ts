@@ -14,6 +14,7 @@ import { Auth } from 'src/auth/auth.decorator';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserResponseDto } from './dto/user-response.dto';
 import { UsersService } from './users.service';
+import { getUserDto } from './utils';
 
 @Controller('users')
 @ApiTags('users')
@@ -29,8 +30,10 @@ export class UsersController {
   @Get('me')
   @ApiResponse({ type: UserResponseDto })
   @Auth()
-  getMe(@Req() request: Request<void, { userId: string }>) {
-    return this.userService.getById(request.body.userId);
+  async getMe(@Req() request: Request<void, { userId: string }>) {
+    const user = await this.userService.getById(request.body.userId);
+
+    return getUserDto(user);
   }
 
   @Get(':id')
