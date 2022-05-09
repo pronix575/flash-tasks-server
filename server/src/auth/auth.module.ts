@@ -1,14 +1,15 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { UsersModule } from 'src/users/users.module';
 import { AuthController } from './auth.controller';
+import { Auth } from './auth.decorator';
 import { AuthInterceptor } from './auth.interceptor';
 import { AuthService } from './auth.service';
 
 @Module({
   imports: [
-    UsersModule,
+    forwardRef(() => UsersModule),
     PassportModule,
     JwtModule.register({
       secret: 'secret',
@@ -17,6 +18,6 @@ import { AuthService } from './auth.service';
   ],
   controllers: [AuthController],
   providers: [AuthService, AuthInterceptor],
-  exports: [AuthInterceptor],
+  exports: [AuthInterceptor, AuthService],
 })
 export class AuthModule {}

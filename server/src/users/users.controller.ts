@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Request } from 'express';
+import { Auth } from 'src/auth/auth.decorator';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserResponseDto } from './dto/user-response.dto';
 import { UsersService } from './users.service';
@@ -25,6 +26,13 @@ export class UsersController {
     return this.userService.getAll();
   }
 
+  @Get('me')
+  @ApiResponse({ type: UserResponseDto })
+  @Auth()
+  getMe(@Req() request: Request<void, { userId: string }>) {
+    return this.userService.getById(request.body.userId);
+  }
+
   @Get(':id')
   @HttpCode(HttpStatus.CREATED)
   @ApiResponse({ type: UserResponseDto })
@@ -35,11 +43,5 @@ export class UsersController {
   @Post()
   createUser(@Body() createUserDto: CreateUserDto) {
     return this.userService.createUser(createUserDto);
-  }
-
-  @Get('me')
-  @ApiResponse({ type: UserResponseDto })
-  getMe(@Req() request: Request<void, { userId: string }>) {
-    return this.userService.getById(request.body.userId);
   }
 }

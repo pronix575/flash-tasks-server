@@ -12,6 +12,7 @@ async function bootstrap() {
     .setTitle('TodoList example')
     .setDescription('The TodoList API description')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
 

@@ -19,10 +19,10 @@ export class AuthInterceptor implements NestInterceptor {
     next: CallHandler,
   ): Promise<Observable<any>> {
     const request: Request = context.switchToHttp().getRequest();
-    const token = request.headers['authorization'];
+    const token: string = request.headers['authorization'] as string;
 
     try {
-      const res = await this.authService.verify(token);
+      const res = await this.authService.verify(token.split(' ')[1]);
 
       if (token) {
         request.body['userId'] = res.userId;
