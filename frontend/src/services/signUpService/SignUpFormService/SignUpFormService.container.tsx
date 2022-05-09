@@ -2,6 +2,7 @@ import { message } from "antd";
 import { useEvent, useStore } from "effector-react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useNetworkErrors } from "../../../hooks/useNetworkErrors";
 import { signUpService } from "../signUpService.models";
 import { SignUpForm } from "./components/SignUpForm";
 import { SignUpFormService } from "./SignUpFormService.models";
@@ -14,13 +15,7 @@ export const SignUpFormContainer = () => {
   const signUpSuccess = signUpService.outputs.signUpSuccess;
   const signUpFailed = signUpService.outputs.signUpFailed;
 
-  useEffect(() => {
-    signUpFailed.watch((res: any) => {
-      const errorMessage: string | string[] = res.response.data.message;
-
-      message.error(errorMessage[0]);
-    });
-  }, []);
+  useNetworkErrors(signUpFailed);
 
   useEffect(
     () =>
