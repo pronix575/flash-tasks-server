@@ -18,9 +18,11 @@ authService.inputs.signOutUser.watch(() => {
 
 sample({
   clock: authService.outputs.authGateOpened,
-  fn: () => {
+  filter: () => {
     const access = localStorage.getItem("AccessToken");
     const refresh = localStorage.getItem("RefreshToken");
+
+    console.log(access, refresh);
 
     return Boolean(access && refresh);
   },
