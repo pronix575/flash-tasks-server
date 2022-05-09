@@ -62,7 +62,7 @@ export class AuthService {
       );
     }
 
-    const tokenPayload = {
+    const tokenPayload: TokenDto = {
       userId: user._id,
     };
 
@@ -72,5 +72,9 @@ export class AuthService {
     });
 
     return { access, refresh };
+  }
+
+  async verify(accessToken: string): Promise<TokenDto> {
+    return await this.jwtService.verifyAsync(accessToken);
   }
 }
