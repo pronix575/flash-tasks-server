@@ -1,6 +1,8 @@
 import {
   CallHandler,
   ExecutionContext,
+  HttpException,
+  HttpStatus,
   Injectable,
   NestInterceptor,
 } from '@nestjs/common';
@@ -27,6 +29,11 @@ export class AuthInterceptor implements NestInterceptor {
       }
 
       return next.handle();
-    } catch (error) {}
+    } catch (error) {
+      throw new HttpException(
+        'Please, authorize first',
+        HttpStatus.UNAUTHORIZED,
+      );
+    }
   }
 }
