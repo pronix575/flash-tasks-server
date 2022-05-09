@@ -1,8 +1,24 @@
 import { FC, useEffect } from "react";
-import { Wrap, BackgroundWrap, ModalWrap } from "./Modal.styled";
+import {
+  Wrap,
+  BackgroundWrap,
+  ModalWrap,
+  StyledModal,
+  Title,
+  Close,
+  Content,
+  CloseWrapper,
+} from "./Modal.styled";
 import { ModalProps } from "./Modal.types";
+import { XLg } from "react-bootstrap-icons";
 
-export const Modal: FC<ModalProps> = ({ children, onHide, show }) => {
+export const Modal: FC<ModalProps> = ({
+  children,
+  onHide,
+  show,
+  customContent,
+  title,
+}) => {
   useEffect(() => {
     if (show) {
       window.document.body.style.overflow = "hidden";
@@ -14,14 +30,25 @@ export const Modal: FC<ModalProps> = ({ children, onHide, show }) => {
     };
   }, [show]);
 
-  return (
+  return show ? (
     <Wrap>
       <ModalWrap>
         <BackgroundWrap
           onClick={onHide}
           style={{ cursor: onHide ? "pointer" : "default" }}
         />
+        <StyledModal>
+          <CloseWrapper>
+          <Title>{title}</Title>
+          {onHide && (
+            <Close onClick={onHide}>
+              <XLg />
+            </Close>
+          )}
+          </CloseWrapper>
+        <Content>{children}</Content>
+        </StyledModal>
       </ModalWrap>
     </Wrap>
-  );
+  ) : null;
 };

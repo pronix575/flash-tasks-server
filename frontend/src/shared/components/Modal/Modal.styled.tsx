@@ -7,7 +7,7 @@ export const Wrap = styled.div`
 
 export const BackgroundWrap = styled.div`
   position: fixed;
- height: 100%;
+  height: 100%;
   width: 100%;
   background: #00000025;
   backdrop-filter: blur(4px);
@@ -34,7 +34,7 @@ export const openModelAnimation = keyframes`
     }
 `;
 
-export const StyedModal = styled.div<{ pending?: boolean }>`
+export const StyledModal = styled.div<{ pending?: boolean }>`
   margin: 0 15px;
   padding: 15px;
   background: white;
@@ -62,6 +62,7 @@ export const Title = styled.div`
 export const Close = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   border-radius: 30px;
   width: 35px;
   height: 35px;
@@ -79,4 +80,9 @@ export const Close = styled.div`
 export const Content = styled.div`
   overflow-y: auto;
   max-height: 500px;
+`;
+
+export const CloseWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
