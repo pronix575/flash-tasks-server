@@ -25,7 +25,7 @@ export class DesksService {
 
     const user = await this.userModel.findById(createDeskDto.userId);
 
-    desk.creator = user;
+    desk.creator = user._id;
 
     return await desk.save();
   }
@@ -39,11 +39,15 @@ export class DesksService {
   }
 
   async getById(id: string, userId: string): Promise<DeskResponseDto> {
-    const desk = await this.deskModel.findById(id);
+    try {
+      const desk = await this.deskModel.findById(id);
 
-    if (desk.creator._id === userId) {
-      return desk;
-    } else {
+      if (desk.creator.toString() === userId) {
+        return desk;
+      } else {
+        throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+      }
+    } catch (error) {
       throw new HttpException('Not found', HttpStatus.NOT_FOUND);
     }
   }

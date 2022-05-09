@@ -21,7 +21,7 @@ export class DesksController {
   @Auth()
   @ApiResponse({ type: DeskResponseDto })
   getOne(@Param('id') id: string, @UserId() userId: string) {
-    this.desksService.getById(id, userId);
+    return this.desksService.getById(id, userId);
   }
 
   @Post()

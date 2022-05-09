@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, SchemaTypes } from 'mongoose';
+import { Document, SchemaTypes, Types } from 'mongoose';
 import { User } from 'src/users/schemas/user.schema';
 
 export type DeskDocument = Desk & Document;
@@ -24,7 +24,7 @@ export class Desk {
   columns: Column[];
 
   @Prop({ type: SchemaTypes.ObjectId, ref: User.name })
-  creator: User;
+  creator: Types.ObjectId;
 
   _id: string;
 }
