@@ -25,6 +25,8 @@ export const Wrapper = styled.div<{
   display: flex;
   justify-content: center;
 
+  transition: 0.2s;
+
   &:hover {
     opacity: 0.9;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);

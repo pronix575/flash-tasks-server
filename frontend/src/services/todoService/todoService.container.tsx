@@ -1,5 +1,5 @@
-import { TodoPage } from "./components/TodoPage"
+import { Dashboard } from "./components/Dashboard"
 
-export const TodoContainer = () => {
-    return <TodoPage/> 
+export const DashboardContainer = () => {
+    return <Dashboard/> 
 }
