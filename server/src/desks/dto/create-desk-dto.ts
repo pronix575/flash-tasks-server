@@ -11,12 +11,12 @@ import {
 class CloumnDto {
   @ApiProperty()
   @IsString()
-  @Length(3, 20)
+  @Length(3, 30)
   name: string;
 
   @ApiProperty({ required: false })
   @IsString()
-  @Length(3, 20)
+  @Length(3, 30)
   color?: string;
 }
 
