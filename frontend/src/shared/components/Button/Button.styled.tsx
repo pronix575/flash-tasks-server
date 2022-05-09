@@ -4,14 +4,18 @@ export const Wrapper = styled.div<{
   block?: boolean;
   size: "lg" | "sm";
   disabled: boolean;
+  outlined: boolean;
 }>`
-  background-color: var(--main-color);
+  background-color: ${({ outlined }) =>
+    outlined ? "none" : "var(--main-color)"};
+  border: 3px solid var(--main-color);
+  box-sizing: border-box;
   color: white;
   font-weight: 600;
   width: min-content;
   white-space: nowrap;
   user-select: none;
-  cursor: pointer; 
+  cursor: pointer;
 
   padding: ${({ size }) => (size === "lg" ? "15px 35px" : "5px 25px")};
   font-size: ${({ size }) => (size === "lg" ? "18px" : "16px")};

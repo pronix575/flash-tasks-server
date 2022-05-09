@@ -3,9 +3,11 @@ import { Button } from "../../../../shared/components/Button";
 import { Layout } from "../../../../shared/components/Layout";
 import { SignUpFormContainer } from "../../SignUpFormService/SignUpFormService.container";
 import {
+  ButtonsWrapper,
   FormWrapper,
   GradientTitle,
   Greeting,
+  SignUpButtonWrapper,
   Wrap,
 } from "./GreetingPage.styled";
 
@@ -22,9 +24,16 @@ export const GreetingPage = () => {
             </GradientTitle>{" "}
             right now!
           </div>
-          <Link to="/SignIn">
-            <Button style={{ marginTop: 15 }}>Sign in</Button>
-          </Link>
+          <ButtonsWrapper>
+            <Link to="/SignIn">
+              <Button>Sign in</Button>
+            </Link>
+            <SignUpButtonWrapper>
+              <Link to="/SignUp">
+                <Button outlined>Sign Up</Button>
+              </Link>
+            </SignUpButtonWrapper>
+          </ButtonsWrapper>
         </Greeting>
         <FormWrapper>
           <SignUpFormContainer />

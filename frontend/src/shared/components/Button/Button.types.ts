@@ -7,4 +7,5 @@ export interface ButtonProps extends BaseLayoutProps {
   loading?: boolean;
   size?: "lg" | "sm";
   onClick?: VoidFunction;
+  outlined?: boolean;
 }

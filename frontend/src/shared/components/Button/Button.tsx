@@ -1,5 +1,5 @@
 import { FC } from "react";
-import {  Wrapper } from "./Button.styled";
+import { Wrapper } from "./Button.styled";
 import { ButtonProps } from "./Button.types";
 
 export const Button: FC<ButtonProps> = ({
@@ -9,6 +9,7 @@ export const Button: FC<ButtonProps> = ({
   block = false,
   onClick,
   loading = false,
+  outlined = false,
 }) => {
   return (
     <Wrapper
@@ -17,8 +18,9 @@ export const Button: FC<ButtonProps> = ({
       block={block}
       onClick={onClick}
       disabled={loading}
+      outlined={outlined}
     >
-       {children}
+      {children}
     </Wrapper>
   );
 };

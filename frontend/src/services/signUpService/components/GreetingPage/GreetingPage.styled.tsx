@@ -8,7 +8,7 @@ export const Wrap = styled.div`
 `;
 
 export const Greeting = styled.div`
-  user-select: none; 
+  user-select: none;
   font-size: 40px;
   font-weight: 900;
   color: white;
@@ -22,7 +22,19 @@ export const GradientTitle = styled.span`
 `;
 
 export const FormWrapper = styled.div`
-  @media (min-width:0) and (max-width: 900px) {
+  @media (min-width: 0) and (max-width: 900px) {
     display: none;
   }
-`
+`;
+
+export const SignUpButtonWrapper = styled.div`
+  margin-left: 15px;
+  @media (min-width: 900px) {
+    display: none;
+  }
+`;
+
+export const ButtonsWrapper = styled.div`
+  margin-top: 15px;
+  display: flex;
+`;
