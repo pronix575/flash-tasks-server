@@ -30,3 +30,15 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+
+export const UserName = styled.div`
+  cursor: pointer;
+  color: white;
+  font-weight: 450;
+  font-size: 15px;
+`;
+
+export const UserWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { authService } from "../services/authService";
 
 export const api = axios.create({});
 
@@ -23,13 +24,14 @@ api.interceptors.response.use(
     ) {
       originalRequest._isRetry = true;
       try {
-        const response = await axios.get("http://localhost:9000/api/auth/refresh", {
-          withCredentials: true,
-        });
-        localStorage.setItem("token", response.data.accessToken);
+        const tokens = (await axios.post("http://localhost:9000/api/auth/refresh", {refresh:localStorage.getItem("RefreshToken")})).data;
+        localStorage.setItem("AccessToken", tokens.access);
+        localStorage.setItem("RefreshToken", tokens.refresh);
+
         return api.request(originalRequest);
       } catch (e) {
         console.log("НЕ авторизован");
+        authService.inputs.signOutUser();
       }
     }
     throw error;
