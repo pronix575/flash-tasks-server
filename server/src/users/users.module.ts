@@ -9,7 +9,7 @@ import { UsersService } from './users.service';
   imports: [
     MongooseModule.forFeature([
       {
-        name: User.name,
+        name: 'User',
         schema: UserSchema,
       },
     ]),

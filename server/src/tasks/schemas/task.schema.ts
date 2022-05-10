@@ -5,17 +5,22 @@ export type TaskDocument = Task & Document;
 
 @Schema()
 export class Task {
-  @Prop({ required: true })
-  name: string;
+  @Prop({ required: true, type: SchemaTypes.String })
+  title: string;
 
-  @Prop({ required: true, unique: true })
-  email: string;
+  @Prop({ type: SchemaTypes.String })
+  description: string;
 
-  @Prop({ required: true, unique: true })
-  password: string;
+  @Prop({ required: true, type: SchemaTypes.ObjectId, ref: 'User' })
+  creator: Types.ObjectId;
 
-  @Prop({ default: [], type: [SchemaTypes.ObjectId] })
-  desks: Types.ObjectId[];
+  @Prop({ required: true, type: SchemaTypes.ObjectId, ref: 'Desk' })
+  desk: Types.ObjectId;
+
+  @Prop({ type: SchemaTypes.ObjectId, ref: 'Column' })
+  column?: Types.ObjectId;
+
+  _id: string;
 }
 
-export const UserSchema = SchemaFactory.createForClass(Task);
+export const TaskSchema = SchemaFactory.createForClass(Task);
