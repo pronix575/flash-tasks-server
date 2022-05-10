@@ -7,5 +7,13 @@ createDeskService.outputs.$modalIsOpen
 
 forward({
   from: createDeskService.inputs.createDesk,
-  to: createDeskService.inputs.createDeskFx,
+  to: [createDeskService.inputs.createDeskFx],
+});
+
+forward({
+  from: createDeskService.outputs.createDeskSuccess,
+  to: [
+    createDeskService.inputs.closeModal,
+    createDeskService.inputs.getDesksFx,
+  ],
 });
