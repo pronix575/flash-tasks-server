@@ -1,19 +1,26 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, SchemaTypes, Types } from 'mongoose';
-import { Desk } from 'src/desks/schemas/desk.schema';
 
 export type TaskDocument = Task & Document;
 
 @Schema()
 export class Task {
   @Prop({ required: true, type: SchemaTypes.String })
-  name: string;
+  title: string;
 
   @Prop({ type: SchemaTypes.String })
   description: string;
 
-  @Prop({ required: true, type: SchemaTypes.ObjectId })
+  @Prop({ required: true, type: SchemaTypes.ObjectId, ref: 'User' })
   creator: Types.ObjectId;
+
+  @Prop({ required: true, type: SchemaTypes.ObjectId, ref: 'Desk' })
+  desk: Types.ObjectId;
+
+  @Prop({ type: SchemaTypes.ObjectId, ref: 'Column' })
+  column?: Types.ObjectId;
+
+  _id: string;
 }
 
-export const UserSchema = SchemaFactory.createForClass(Task);
+export const TaskSchema = SchemaFactory.createForClass(Task);
