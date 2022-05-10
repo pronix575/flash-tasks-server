@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Modal } from "../../../../shared/components/Modal";
+import { CreateDeskFormContainer } from "../../CreateDeskFormService/CreateDeskForm.container";
 import { CreateDeskModalProps } from "./CreateDeskModal.types";
 
 export const CreateDeskModal: FC<CreateDeskModalProps> = ({show, handleClosingModal}) => {
@@ -10,7 +11,7 @@ export const CreateDeskModal: FC<CreateDeskModalProps> = ({show, handleClosingMo
       title={"Create new desk"}
       onHide={handleClosingModal}
     >
-      dfjkldfnglkdfnbdf
+      <CreateDeskFormContainer/>
     </Modal>
   );
 };

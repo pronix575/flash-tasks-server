@@ -2,7 +2,6 @@ import { Form, Input } from "antd";
 import { useFormik } from "formik";
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { CreateUserDto } from "../../../../../api/types";
 import { Button } from "../../../../../shared/components/Button";
 import {
   ButtonWrapper,

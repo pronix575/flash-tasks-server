@@ -1,1 +1,1 @@
-export { createDeskService } from "./createDeskService.modals";
+export { createDeskService } from "./createDeskService.models";

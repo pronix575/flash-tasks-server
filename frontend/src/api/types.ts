@@ -9,18 +9,6 @@
  * ---------------------------------------------------------------
  */
 
-export interface UserResponseDto {
-  name: string;
-  email: string;
-}
-
-export interface CreateUserDto {
-  name: string;
-  email: string;
-  password: string;
-  passwordConfirmation: string;
-}
-
 export interface SignInDto {
   email: string;
   password: string;
@@ -33,6 +21,45 @@ export interface SignInResponseDto {
 
 export interface RefreshRequestDto {
   refresh: string;
+}
+
+export interface UserResponseDto {
+  id: string;
+  name: string;
+  email: string;
+}
+
+export interface CreateUserDto {
+  name: string;
+  email: string;
+  password: string;
+  passwordConfirmation: string;
+}
+
+export interface ColumnResponseDto {
+  _id: string;
+  name: string;
+  color?: string;
+}
+
+export interface DeskResponseDto {
+  _id: string;
+  name: string;
+  columns: ColumnResponseDto[];
+}
+
+export interface DesksListResponseDto {
+  items: DeskResponseDto[];
+}
+
+export interface ColumnCreateDto {
+  name: string;
+  color?: string;
+}
+
+export interface CreateDeskDto {
+  name: string;
+  columns: ColumnCreateDto[];
 }
 
 export type QueryParamsType = Record<string | number, any>;
@@ -255,64 +282,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags users
-     * @name UsersControllerGetAll
-     * @request GET:/api/users
-     */
-    usersControllerGetAll: (params: RequestParams = {}) =>
-      this.request<any, UserResponseDto[]>({
-        path: `/api/users`,
-        method: "GET",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags users
-     * @name UsersControllerCreateUser
-     * @request POST:/api/users
-     */
-    usersControllerCreateUser: (data: CreateUserDto, params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/api/users`,
-        method: "POST",
-        body: data,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags users
-     * @name UsersControllerGetOne
-     * @request GET:/api/users/{id}
-     */
-    usersControllerGetOne: (id: string, params: RequestParams = {}) =>
-      this.request<any, UserResponseDto>({
-        path: `/api/users/${id}`,
-        method: "GET",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags users
-     * @name UsersControllerGetMe
-     * @request GET:/api/users/me
-     */
-    usersControllerGetMe: (params: RequestParams = {}) =>
-      this.request<any, UserResponseDto>({
-        path: `/api/users/me`,
-        method: "GET",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
      * @tags auth
      * @name AuthControllerLogin
      * @request POST:/api/auth/login
@@ -339,6 +308,152 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "POST",
         body: data,
         type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags users
+     * @name UsersControllerGetMe
+     * @request GET:/api/users/me
+     * @secure
+     */
+    usersControllerGetMe: (params: RequestParams = {}) =>
+      this.request<any, UserResponseDto>({
+        path: `/api/users/me`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags users
+     * @name UsersControllerGetOne
+     * @request GET:/api/users/{id}
+     * @secure
+     */
+    usersControllerGetOne: (id: string, params: RequestParams = {}) =>
+      this.request<any, UserResponseDto>({
+        path: `/api/users/${id}`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags users
+     * @name UsersControllerCreateUser
+     * @request POST:/api/users
+     */
+    usersControllerCreateUser: (data: CreateUserDto, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/users`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags desks
+     * @name DesksControllerGetAll
+     * @request GET:/api/desks
+     * @secure
+     */
+    desksControllerGetAll: (params: RequestParams = {}) =>
+      this.request<any, DesksListResponseDto>({
+        path: `/api/desks`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags desks
+     * @name DesksControllerCreateDesk
+     * @request POST:/api/desks
+     * @secure
+     */
+    desksControllerCreateDesk: (data: CreateDeskDto, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/desks`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags desks
+     * @name DesksControllerGetOne
+     * @request GET:/api/desks/{id}
+     * @secure
+     */
+    desksControllerGetOne: (id: string, params: RequestParams = {}) =>
+      this.request<any, DeskResponseDto>({
+        path: `/api/desks/${id}`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags desks
+     * @name DesksControllerDeleteDesk
+     * @request DELETE:/api/desks/{id}
+     * @secure
+     */
+    desksControllerDeleteDesk: (id: string, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/desks/${id}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags tasks
+     * @name TasksControllerCreateTask
+     * @request POST:/api/tasks
+     * @secure
+     */
+    tasksControllerCreateTask: (params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/tasks`,
+        method: "POST",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags tasks
+     * @name TasksControllerGetAll
+     * @request GET:/api/tasks
+     * @secure
+     */
+    tasksControllerGetAll: (params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/tasks`,
+        method: "GET",
+        secure: true,
         ...params,
       }),
   };
