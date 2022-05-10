@@ -20,7 +20,7 @@ export class Desk {
   @Prop({ required: true, type: String })
   name: string;
 
-  @Prop({ type: [ColumnSchema] })
+  @Prop({ default: [], type: [ColumnSchema] })
   columns: Column[];
 
   @Prop({ type: SchemaTypes.ObjectId, ref: User.name })
