@@ -1,4 +1,5 @@
 import { createDomain } from "effector";
+import { dashboardService } from "../dashboardService";
 import { createNewDesk } from "./createDeskService.api";
 import { CreateDeskResponse } from "./createDeskService.types";
 
@@ -14,16 +15,21 @@ const createDeskFx = createDeskServiceDomain.createEffect<CreateDeskResponse, vo
 
 const $loading = createDeskFx.pending;
 
+const createDeskSuccess = createDeskFx.doneData;
+const createDeskFailed = createDeskFx.failData;
 
 export const createDeskService = {
   inputs: {
+    getDesksFx : dashboardService.inputs.getDesksFx,
     openModal,
     closeModal,
     createDesk,
-    createDeskFx
+    createDeskFx,
   },
   outputs: {
     $modalIsOpen,
-    $loading
+    $loading,
+    createDeskSuccess,
+    createDeskFailed,
   },
 };

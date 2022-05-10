@@ -1,12 +1,18 @@
 import { FC } from "react";
-import { ButtonWrapper, ErrorText, Wrapper } from "./CreateDeskForm.styled";
+import {
+  ButtonWrapper,
+  ColumnsFormWrapper,
+  ErrorText,
+  Wrapper,
+} from "./CreateDeskForm.styled";
 import { CreateDeskFormProps } from "./CreateDeskForm.types";
 import * as Yup from "yup";
 import { CreateDeskResponse } from "../../../createDeskService.types";
 import { useFormik } from "formik";
 import { ColumnCreateDto } from "../../../../../api/types";
-import { Form, Input } from "antd";
+import { Form, Input, message } from "antd";
 import { Button } from "../../../../../shared/components/Button";
+import { ColumnForm } from "./components/ColumnForm";
 
 const CreateDeskSchema = Yup.object().shape({
   name: Yup.string()
@@ -19,17 +25,26 @@ export const CreateDeskForm: FC<CreateDeskFormProps> = ({
   handleSubmit,
   loading,
 }) => {
-  const { values, handleChange, errors, submitForm } =
+  const { values, setFieldValue, handleChange, errors, submitForm } =
     useFormik<CreateDeskResponse>({
       initialValues: {
         name: "",
-        columns: [] as ColumnCreateDto[],
+        columns: [{ name: "", color: "" }] as ColumnCreateDto[],
       },
       validateOnBlur: false,
       validateOnChange: false,
       validationSchema: CreateDeskSchema,
       onSubmit: handleSubmit,
     });
+
+  const addNewColumn = () => {
+    if (values.columns.length <= 5)
+      return setFieldValue("columns", [
+        ...values.columns,
+        { name: "", color: "" },
+      ]);
+    return message.error("Column number should be less than 6");
+  };
 
   return (
     <Wrapper>
@@ -44,23 +59,21 @@ export const CreateDeskForm: FC<CreateDeskFormProps> = ({
         <ErrorText>{errors.name}</ErrorText>
       </Form.Item>
       <Form.Item label="Columns">
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gridGap: "15px",
-          }}
+        <ColumnsFormWrapper>
+          {values.columns.map((column, index) => (
+            <ColumnForm
+              column={column}
+              key={index}
+              onChange={(value) => setFieldValue(`columns[${index}]`, value)}
+            />
+          ))}
+        </ColumnsFormWrapper>
+        <Button
+          style={{ color: "var(--main-color)" }}
+          size="sm"
+          outlined
+          onClick={addNewColumn}
         >
-          <Form.Item label="Name">
-            <Input placeholder="input name" />
-          </Form.Item>
-          <Form.Item label="Color">
-            <div
-              style={{ width: "100%", backgroundColor: "red", height: "20px" }}
-            >color</div>
-          </Form.Item>
-        </div>
-        <Button style={{ color: "var(--main-color)" }} size="sm" outlined>
           + Add column
         </Button>
       </Form.Item>

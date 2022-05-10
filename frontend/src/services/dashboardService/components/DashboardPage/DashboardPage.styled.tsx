@@ -33,3 +33,8 @@ export const PlusWrapper = styled.div`
 
   font-size: 80px;
 `;
+
+export const DesksWrapper =styled.div`
+  display: flex;
+  align-items: center;
+`
