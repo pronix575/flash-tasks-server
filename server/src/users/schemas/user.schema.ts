@@ -17,6 +17,9 @@ export class User {
   @Prop({ default: [], type: [SchemaTypes.ObjectId] })
   desks: Types.ObjectId[];
 
+  @Prop()
+  avatar: string;
+
   _id: string;
 }
 

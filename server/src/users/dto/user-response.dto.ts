@@ -9,4 +9,7 @@ export class UserResponseDto {
 
   @ApiProperty()
   email: string;
+
+  @ApiProperty()
+  avatar: string;
 }

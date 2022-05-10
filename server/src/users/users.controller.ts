@@ -5,13 +5,15 @@ import {
   HttpCode,
   HttpStatus,
   Param,
+  Patch,
   Post,
   Req,
 } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Request } from 'express';
-import { Auth } from 'src/auth/auth.decorator';
+import { Auth, UserId } from 'src/auth/auth.decorator';
 import { CreateUserDto } from './dto/create-user.dto';
+import { PatchUserDto } from './dto/patch-user.dto';
 import { UserResponseDto } from './dto/user-response.dto';
 import { UsersService } from './users.service';
 import { getUserDto } from './utils';
@@ -28,6 +30,12 @@ export class UsersController {
     const user = await this.userService.getById(request.body.userId);
 
     return getUserDto(user);
+  }
+
+  @Patch()
+  @Auth()
+  patchUser(@Body() patchUserDto: PatchUserDto, @UserId() userId: string) {
+    return this.userService.patch(patchUserDto, userId);
   }
 
   @Get(':id')

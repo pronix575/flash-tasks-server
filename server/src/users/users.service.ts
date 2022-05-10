@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, SchemaTypes } from 'mongoose';
-import { Desk, DeskDocument } from 'src/desks/schemas/desk.schema';
+import { Model } from 'mongoose';
+import { DeskDocument } from 'src/desks/schemas/desk.schema';
 import { hashPassword } from 'src/utils/hashPassword';
 import { CreateUserDto } from './dto/create-user.dto';
+import { PatchUserDto } from './dto/patch-user.dto';
 import { UserResponseDto } from './dto/user-response.dto';
 import { User, UserDocument } from './schemas/user.schema';
 import { getUserDto } from './utils';
@@ -19,7 +20,11 @@ export class UsersService {
   }
 
   async getById(id: string): Promise<User> {
-    return this.userModel.findById(id);
+    const user = await this.userModel.findById(id);
+
+    if (!user) throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+
+    return user;
   }
 
   async getByEmail(email: string): Promise<User> {
@@ -46,5 +51,13 @@ export class UsersService {
     user.desks.push(desk._id);
 
     return await user.save();
+  }
+
+  async patch(patchUserDto: PatchUserDto, userId: string) {
+    const user = await this.userModel.findByIdAndUpdate(userId, patchUserDto, {
+      new: true,
+    });
+
+    return getUserDto(user);
   }
 }
