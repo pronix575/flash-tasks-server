@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
-export const ColorPickerWrapper = styled.div<{ active: boolean }>`
-  display: ${({ active }) => (active ? "block" : "none")};
+export const ColorPickerWrapper = styled.div`
 
   .react-colorful {
     width: 150px;
@@ -26,6 +25,3 @@ export const ColorPickerWrapper = styled.div<{ active: boolean }>`
   }
 `;
 
-export const ButtonWrapper = styled.div<{ active: boolean }>`
-  display: ${({ active }) => (!active ? "block" : "none")};
-`;
