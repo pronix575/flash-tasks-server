@@ -2,8 +2,9 @@ import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Auth, UserId } from 'src/auth/auth.decorator';
 import { DesksService } from './desks.service';
-import { DeskResponseDto, DesksListResponseDto } from './dto/desks-list.dto';
+import { DesksListResponseDto } from './dto/desks-list.dto';
 import { CreateDeskDto } from './dto/create-desk-dto';
+import { DeskResponseDto } from './dto/desk-response.dto';
 
 @Controller('desks')
 @ApiTags('desks')

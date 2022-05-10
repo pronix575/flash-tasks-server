@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { DeskDocument } from 'src/desks/schemas/desk.schema';
 import { CreateTaskDto } from './dto/create-task.dto';
-import { TaskDocument } from './schemas/task.schema';
+import { Task, TaskDocument } from './schemas/task.schema';
 
 @Injectable()
 export class TasksService {
@@ -42,5 +42,9 @@ export class TasksService {
     );
 
     return task;
+  }
+
+  async getTasksByDesk(deskId: string): Promise<Task[]> {
+    return await this.taskModel.find({ desk: deskId });
   }
 }

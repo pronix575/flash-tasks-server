@@ -1,18 +1,20 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, ObjectId } from 'mongoose';
 import { UserDocument } from 'src/users/schemas/user.schema';
 import { UsersService } from 'src/users/users.service';
-import { DeskResponseDto, DesksListResponseDto } from './dto/desks-list.dto';
+import { DesksListResponseDto } from './dto/desks-list.dto';
 import { CreateDeskDto } from './dto/create-desk-dto';
 import { Desk, DeskDocument } from './schemas/desk.schema';
+import { DeskResponseDto } from './dto/desk-response.dto';
+import { TasksService } from 'src/tasks/tasks.service';
 
 @Injectable()
 export class DesksService {
   constructor(
     @InjectModel('Desk') private deskModel: Model<DeskDocument>,
-    @InjectModel('User') private userModel: Model<UserDocument>,
-    private readonly userService: UsersService,
+    private readonly usersService: UsersService,
+    private readonly tasksService: TasksService,
   ) {}
   async createDesk(
     createDeskDto: CreateDeskDto & { userId: string },
@@ -21,11 +23,11 @@ export class DesksService {
 
     const desk = await newDesk.save();
 
-    await this.userService.addDesk(desk, createDeskDto.userId);
+    await this.usersService.addDesk(desk, createDeskDto.userId);
 
-    const user = await this.userModel.findById(createDeskDto.userId);
+    const user = await this.usersService.getById(createDeskDto.userId);
 
-    desk.creator = user._id;
+    desk.creator = user._id as any;
 
     return await desk.save();
   }
@@ -43,7 +45,7 @@ export class DesksService {
       const desk = await this.deskModel.findById(id);
 
       if (desk.creator.toString() === userId) {
-        return desk;
+        return desk as any;
       } else {
         throw new HttpException('Not found', HttpStatus.NOT_FOUND);
       }
