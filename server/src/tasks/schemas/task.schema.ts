@@ -17,8 +17,8 @@ export class Task {
   @Prop({ required: true, type: SchemaTypes.ObjectId, ref: 'Desk' })
   desk: Types.ObjectId;
 
-  @Prop({ type: SchemaTypes.ObjectId, ref: 'Column' })
-  column?: Types.ObjectId;
+  @Prop({ required: true, type: SchemaTypes.ObjectId, ref: 'Column' })
+  column: Types.ObjectId;
 
   _id: string;
 }

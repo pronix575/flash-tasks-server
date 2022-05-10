@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { User, UserDocument } from 'src/users/schemas/user.schema';
+import { UserDocument } from 'src/users/schemas/user.schema';
 import { UsersService } from 'src/users/users.service';
 import { DeskResponseDto, DesksListResponseDto } from './dto/desks-list.dto';
 import { CreateDeskDto } from './dto/create-desk-dto';
@@ -10,8 +10,8 @@ import { Desk, DeskDocument } from './schemas/desk.schema';
 @Injectable()
 export class DesksService {
   constructor(
-    @InjectModel(Desk.name) private deskModel: Model<DeskDocument>,
-    @InjectModel(User.name) private userModel: Model<UserDocument>,
+    @InjectModel('Desk') private deskModel: Model<DeskDocument>,
+    @InjectModel('User') private userModel: Model<UserDocument>,
     private readonly userService: UsersService,
   ) {}
   async createDesk(

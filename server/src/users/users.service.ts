@@ -11,7 +11,7 @@ import { getUserDto } from './utils';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
+  constructor(@InjectModel('User') private userModel: Model<UserDocument>) {}
 
   async getAll(): Promise<UserResponseDto[]> {
     const users = await this.userModel.find().exec();

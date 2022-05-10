@@ -24,6 +24,8 @@ async function bootstrap() {
     origin: ['http://localhost:3000'],
   });
 
-  await app.listen(9000, () => console.log(`server has been started`));
+  await app.listen(9000, () =>
+    console.log(`🚀 server has been started at http://localhost:9000`),
+  );
 }
 bootstrap();

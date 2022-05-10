@@ -18,7 +18,6 @@ export class CreateTaskDto {
   deskId: string;
 
   @ApiProperty()
-  @IsOptional()
   @IsString()
-  columnId?: string;
+  columnId: string;
 }
