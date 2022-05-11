@@ -1,7 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, ObjectId } from 'mongoose';
-import { UserDocument } from 'src/users/schemas/user.schema';
+import { Model } from 'mongoose';
 import { UsersService } from 'src/users/users.service';
 import { DesksListResponseDto } from './dto/desks-list.dto';
 import { CreateDeskDto } from './dto/create-desk-dto';
@@ -41,17 +40,36 @@ export class DesksService {
   }
 
   async getById(id: string, userId: string): Promise<DeskResponseDto> {
-    try {
-      const desk = await this.deskModel.findById(id);
+    const deskDocument = await this.deskModel.findById(id).catch(() => {
+      throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+    });
 
-      if (desk.creator.toString() === userId) {
-        return desk as any;
-      } else {
-        throw new HttpException('Not found', HttpStatus.NOT_FOUND);
-      }
-    } catch (error) {
+    if (deskDocument.creator.toString() !== userId) {
       throw new HttpException('Not found', HttpStatus.NOT_FOUND);
     }
+
+    const tasks = await this.tasksService.getTasksByDesk(id);
+
+    const columns = deskDocument.columns.map((column) => ({
+      _id: column._id,
+      name: column.name,
+      color: column.color,
+      tasks: tasks
+        .filter((task) => task.column.toString() == column._id)
+        .map((task) => ({
+          title: task.title,
+          description: task.description,
+          _id: task._id,
+        })),
+    }));
+
+    const desk: DeskResponseDto = {
+      _id: deskDocument._id,
+      name: deskDocument.name,
+      columns,
+    };
+
+    return desk;
   }
 
   async deleteById(id: string, userId: string) {
