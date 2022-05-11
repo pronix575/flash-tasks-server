@@ -14,6 +14,7 @@ export const AddDeskWrapper = styled.div`
   border-radius: 20px;
   user-select: none;
 
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,7 +32,6 @@ export const AddDeskWrapper = styled.div`
 
 export const PlusWrapper = styled.div`
   color: white;
-
   font-size: 80px;
 `;
 

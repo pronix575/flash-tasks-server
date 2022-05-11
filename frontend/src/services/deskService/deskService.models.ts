@@ -7,7 +7,7 @@ const deskServiceDomain = createDomain("deskService");
 
 const $desk = deskServiceDomain.createStore<Desk | null>(null);
 
-const getDeskFx = deskServiceDomain.createEffect<string | undefined, Desk>(
+const getDeskFx = deskServiceDomain.createEffect<string, Desk>(
   getDeskRequest
 );
 

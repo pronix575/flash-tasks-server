@@ -15,8 +15,8 @@ export const DeskPage: FC<DeskPageProps> = ({ desk }) => {
               <Title>{desk?.name}</Title>
             </div>
             <ColumnsWrapper>
-              {desk?.columns.map((column) => (
-                <ColumnContainer column={column}/>
+              {desk?.columns.map((column, index) => (
+                <ColumnContainer column={column} key={index}/>
               ))}
             </ColumnsWrapper>
           </DeskWrapper>

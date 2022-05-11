@@ -62,6 +62,13 @@ export interface CreateDeskDto {
   columns: ColumnCreateDto[];
 }
 
+export interface CreateTaskDto {
+  title: string;
+  description: string;
+  deskId: string;
+  columnId: string;
+}
+
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
 
@@ -433,25 +440,45 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/api/tasks
      * @secure
      */
-    tasksControllerCreateTask: (params: RequestParams = {}) =>
+    tasksControllerCreateTask: (data: CreateTaskDto, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/api/tasks`,
         method: "POST",
+        body: data,
         secure: true,
+        type: ContentType.Json,
         ...params,
       }),
 
     /**
      * No description
      *
-     * @tags tasks
-     * @name TasksControllerGetAll
-     * @request GET:/api/tasks
+     * @tags files
+     * @name FilesControllerUploadedFile
+     * @request POST:/api/files/image
      * @secure
      */
-    tasksControllerGetAll: (params: RequestParams = {}) =>
+    filesControllerUploadedFile: (data: { image?: File }, params: RequestParams = {}) =>
       this.request<void, any>({
-        path: `/api/tasks`,
+        path: `/api/files/image`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.FormData,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags files
+     * @name FilesControllerSeeUploadedFile
+     * @request GET:/api/files/image/{path}
+     * @secure
+     */
+    filesControllerSeeUploadedFile: (path: string, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/files/image/${path}`,
         method: "GET",
         secure: true,
         ...params,

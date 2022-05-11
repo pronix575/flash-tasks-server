@@ -8,7 +8,7 @@ deskService.outputs.$desk.on(
 );
 
 sample({
-  clock: deskService.inputs.GetDesk.open,
-  fn: (gateData: GetDeskProps) => gateData.deskId,
+  clock: deskService.inputs.GetDesk.open.map(({deskId})=> deskId),
+  filter: Boolean,
   target: deskService.inputs.getDeskFx,
 });
