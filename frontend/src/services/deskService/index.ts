@@ -1,1 +1,1 @@
-export { desksService } from "./deskService.models";
+export { deskService } from "./deskService.models";

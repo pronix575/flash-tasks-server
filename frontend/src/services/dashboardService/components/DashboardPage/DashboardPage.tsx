@@ -25,13 +25,13 @@ export const DashboardPage: FC<DashboardPageProps> = ({
         <Wrap>
           <Title>Dashboard</Title>
           <DesksWrapper>
+            <DesksListContainer />
             <AddDeskWrapper onClick={handleOpeningModal}>
               <PlusWrapper>+</PlusWrapper>
               <span style={{ color: "white", fontSize: "1.2rem" }}>
                 Add desk
               </span>
             </AddDeskWrapper>
-            <DesksListContainer />
           </DesksWrapper>
         </Wrap>
       </Layout>

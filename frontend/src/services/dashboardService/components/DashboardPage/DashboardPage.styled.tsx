@@ -7,6 +7,7 @@ export const Wrap = styled.div`
 `;
 
 export const AddDeskWrapper = styled.div`
+  margin-left: 20px;
   border: 3px dashed grey;
   width: 300px;
   height: 200px;
