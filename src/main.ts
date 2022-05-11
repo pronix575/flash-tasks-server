@@ -28,8 +28,8 @@ async function bootstrap() {
     ],
   });
 
-  await app.listen(9000, () =>
-    console.log(`🚀 server has been started at http://localhost:9000`),
+  await app.listen(80, () =>
+    console.log(`🚀 server has been started at http://localhost:80`),
   );
 }
 bootstrap();
