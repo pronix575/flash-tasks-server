@@ -21,7 +21,11 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   app.enableCors({
-    origin: ['http://localhost:3000'],
+    origin: [
+      'http://localhost:3000',
+      'http://51.250.105.230',
+      'https://51.250.105.230',
+    ],
   });
 
   await app.listen(9000, () =>
