@@ -1,15 +1,17 @@
+import { useStore } from "effector-react";
 import { useParams } from "react-router-dom";
 import { DeskPage } from "./components/DeskPage";
 import { deskService } from "./deskService.models";
 
 export const DeskContainer = () => {
-  const { GetDesk } = deskService.input;
+  const desk = useStore(deskService.outputs.$desk)
+  const { GetDesk } = deskService.inputs;
 
-  const { deskId } = useParams();
+  const { id } = useParams();
   return (
     <>
-      <GetDesk deskId={deskId}/>
-      <DeskPage></DeskPage>
+      <GetDesk deskId={id} />
+      <DeskPage desk={desk}></DeskPage>
     </>
   );
 };

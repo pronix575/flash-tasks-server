@@ -10,7 +10,7 @@ export const DeskWrapper = styled.div<{ index: number }>`
   width: 60px;
   border-radius: 15px;
   background-color: whitesmoke;
-  box-shadow: 0px 0px 4px 2px grey;
+  box-shadow: 0px 0px 3px 2px grey;
   transition: all 0.2s;
 
   writing-mode: vertical-lr;
