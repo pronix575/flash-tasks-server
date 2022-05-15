@@ -25,6 +25,8 @@ async function bootstrap() {
       'http://localhost:3000',
       'http://51.250.105.230',
       'https://51.250.105.230',
+      'https://flash-tasks.vercel.app/',
+      'https://vercel.app/',
     ],
   });
 
